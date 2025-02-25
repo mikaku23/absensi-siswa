@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('nama_wm', 30);
             $table->text('alamat_wm');
             $table->foreignId('id_local')->references('id')->on('locals')->onDelete('cascade');
-            $table->foreignId('id_pengguna')->references('id')->on('penggunas')->onDelete('cascade');
+            $table->foreignId('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
