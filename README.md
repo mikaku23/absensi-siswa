@@ -14,7 +14,9 @@ Website ini bertujuan untuk mempermudah guru dalam mengabsen siswa di sekolah. P
 - [ ] Fitur Log-out
 
 ### 👨‍🏫 Admin
+- [ ] Dashboard
 - [ ] Fitur Login
+- [ ] Fitur Register
 - [ ] Fitur Menambahkan data siswa
 - [ ] Fitur Melihat data siswa
 - [ ] Fitur Mengedit data siswa
