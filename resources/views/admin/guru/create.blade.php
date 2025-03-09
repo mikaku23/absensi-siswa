@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('title', 'Tambah Data Siswa')
+@section('title', 'Tambah Data Guru')
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 @endsection
@@ -9,14 +9,14 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Tambah Data Siswa</h5>
+            <h5 class="card-title">Tambah Data Guru</h5>
 
             <!-- Vertical Form -->
-            <form class="row g-3" method="POST" action="{{ route('siswa.store') }}">
+            <form class="row g-3" method="POST" action="{{ route('guru.store') }}">
                 @csrf
                 <div class="col-12">
-                    <label for="nisn" class="form-label">Nisn</label>
-                    <input type="number" class="form-control" id="nisn" name="nisn" placeholder="masukkan nisn" required>
+                    <label for="nip" class="form-label">NIP</label>
+                    <input type="number" class="form-control" id="nip" name="nip" placeholder="masukkan nip" required>
                 </div>
                 <div class="col-12">
                     <label for="nama" class="form-label">Nama</label>
@@ -35,16 +35,6 @@
                         </span>
                     </div>
                 </div>
-
-                <div class="col-12">
-                    <label for="kelas" class="form-label">Kelas</label>
-                    <select name="id_local" id="id_local" class="form-control" required>
-                        <option disabled selected value="">Pilih Kelas</option>
-                        @foreach($kelas as $k)
-                        <option value="{{$k['id']}}">{{$k['nama']}}</option>
-                        @endforeach
-                    </select>
-                </div>
                 <div class="col-12">
                     <label for="jk" class="form-label">Jenis Kelamin</label>
                     <select name="jk" id="jk" class="form-control" required>
@@ -54,28 +44,17 @@
                     </select>
                 </div>
                 <div class="col-12">
-                    <label for="alamat" class="form-label">Alamat</label>
-                    <textarea name="alamat" id="alamat" class="form-control" placeholder="masukkan alamat" required></textarea>
-                </div>
-                <div class="col-12">
                     <label for="nohp" class="form-label">Nomor Handphone</label>
                     <input type="number" class="form-control" id="nohp" name="nohp" placeholder="masukkan nohp" required>
                 </div>
                 <div class="col-12">
-                    <label for="nama_wm" class="form-label">Nama WaliMurid</label>
-                    <input type="text" class="form-control" id="nama_wm" name="nama_wm" placeholder="masukkan nama walimurid" required>
+                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="masukkan tanggal lahir " required>
                 </div>
-                <div class="col-12">
-                    <label for="alamat_wm" class="form-label">Alamat WaliMurid</label>
-                    <textarea name="alamat_wm" id="alamat_wm" class="form-control" placeholder="masukkan alamat walimurid" required></textarea>
-                </div>
-                <div class="col-12">
-                    <label for="nohp_wm" class="form-label">Nomor Handphone WaliMurid</label>
-                    <input type="number" class="form-control" id="nohp_wm" name="nohp_wm" placeholder="masukkan nohp walimurid" required>
-                </div>
-                <input type="hidden" name="id_user" value="3">
+              
+                <input type="hidden" name="id_user" value="2">
                 <div class="text-end">
-                    <a href="{{route('siswa.index')}}" class="btn btn-primary">
+                    <a href="{{route('guru.index')}}" class="btn btn-primary">
                         <i class="bi bi-arrow-left"></i> Kembali
                     </a>
                     <button type="reset" class="btn btn-warning">

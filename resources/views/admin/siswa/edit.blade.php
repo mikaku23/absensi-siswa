@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('title', 'Tambah Data Siswa')
+@section('title', 'Mengedit Data ' . $siswa->nama)
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 @endsection
@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Tambah Data Siswa</h5>
+            <h5 class="card-title">Edit Data {{$siswa->nama}}</h5>
 
             <!-- Vertical Form -->
             <form class="row g-3" action="{{route('siswa.update', $siswa->id)}}" method="post" enctype="multipart/form-data">

@@ -1,5 +1,5 @@
 @extends('template.layout')
-@section('title', 'Halaman Index')
+@section('title', 'Data Siswa')
 @section('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <style>

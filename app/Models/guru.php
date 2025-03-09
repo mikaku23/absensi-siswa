@@ -1,4 +1,6 @@
 <?php
+// filepath: /c:/xampp/htdocs/absensi-siswa/app/Models/Guru.php
+
 
 namespace App\Models;
 

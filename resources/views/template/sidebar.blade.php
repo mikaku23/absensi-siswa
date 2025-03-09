@@ -1,4 +1,5 @@
- <aside id="sidebar" class="sidebar">
+
+<aside id="sidebar" class="sidebar">
 
      <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -15,9 +16,9 @@
              </a>
          </li>
          <li class="nav-item">
-             <a class="nav-link {{ $menu == 'local' ? '' : 'collapsed' }}" href="{{ route('local.index') }}">
+             <a class="nav-link {{ $menu == 'guru' ? '' : 'collapsed' }}" href="{{ route('guru.index') }}">
                  <i class="bi bi-person"></i>
-                 <span>Kelas</span>
+                 <span>Guru</span>
              </a>
          </li>
      </ul>

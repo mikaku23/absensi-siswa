@@ -1,5 +1,6 @@
 @extends('template.layout')
-@section('title', 'Tambah Data Siswa')
+@section('title', 'Show Data ' . $siswa->nama)
+
 
 
 @section('konten')
