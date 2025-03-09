@@ -1,0 +1,60 @@
+    .footer {
+        margin-top: 325px;
+    }
+
+    .teks {
+        text-align: center;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: default;
+    }
+
+    .teks h5 {
+        font-size: 1.8em;
+        color: #34495E;
+        margin-bottom: 10px;
+    }
+
+    .teks h6 {
+        font-size: 1.2em;
+        color: #7F8C8D;
+    }
+
+    .teks h6 span {
+        color: #3498db;
+        cursor: pointer;
+    }
+
+    .teks h6 span2 {
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+    }
+
+    .welcome-message-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .welcome-message {
+        font-size: 2em;
+        display: inline-block;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 2px;
+        height: 2em;
+        background-color: black;
+        animation: blink 0.7s steps(1) infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }

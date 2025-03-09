@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\local;
 use App\Models\siswa;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,12 @@ class siswacontroller extends Controller
      */
     public function index()
     {
-        //
+        $datasiswa = Siswa::all();
+        return view('admin.siswa.index', [
+            'menu' => 'siswa',
+            'title' => 'Data Siswa',
+            'datasiswa' => $datasiswa
+        ]);
     }
 
     /**
@@ -20,7 +26,12 @@ class siswacontroller extends Controller
      */
     public function create()
     {
-        //
+        $kelas = local::all();
+        return view('admin.siswa.create', [
+            'menu' => 'siswa',
+            'title' => 'Tambah Data Siswa',
+            'kelas' => $kelas
+        ]);
     }
 
     /**
@@ -28,38 +39,117 @@ class siswacontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validasi = $request->validate([
+            'nama' => 'required',
+            'nisn' => 'required',
+            'alamat' => 'required',
+            'jk' => 'required',
+            'nohp' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'nohp_wm' => 'required',
+            'nama_wm' => 'required',
+            'alamat_wm' => 'required',
+            'id_local' => 'required',
+            'id_user' => 'nullable',
+        ], [
+            'nama.required' => 'Nama Harus Diisi',
+            'nisn.required' => 'NISN Harus Diisi',
+            'alamat.required' => 'Alamat Harus Diisi',
+            'jk.required' => 'Jenis Kelamin Harus Diisi',
+            'nohp.required' => 'No HP murid Harus Diisi',
+            'username.required' => 'Username Harus Diisi',
+            'password.required' => 'Password Harus Diisi',
+            'nohp_wm.required' => 'No HP WaliMurid Harus Diisi',
+            'nama_wm.required' => 'Nama WaliMurid Harus Diisi',
+            'alamat_wm.required' => 'Alamat WaliMurid Harus Diisi',
+            'id_local.required' => 'Kelas Harus Diisi',
+        ]);
+
+        $siswa = new siswa;
+        $siswa->nama = $validasi['nama'];
+        $siswa->nisn = $validasi['nisn'];
+        $siswa->alamat = $validasi['alamat'];
+        $siswa->jk = $validasi['jk'];
+        $siswa->nohp = $validasi['nohp'];
+        $siswa->username = $validasi['username'];
+        $siswa->password = bcrypt($validasi['password']);
+        $siswa->nohp_wm = $validasi['nohp_wm'];
+        $siswa->nama_wm = $validasi['nama_wm'];
+        $siswa->alamat_wm = $validasi['alamat_wm'];
+        $siswa->id_local = $validasi['id_local'];
+        $siswa->id_user = $validasi['id_user'];
+        $siswa->save();
+        return redirect(route('siswa.index'));
     }
 
+        public function show($id)
+    {
+        $siswa = siswa::find($id);
+        return view('admin.siswa.view', [
+            'menu' => 'siswa',
+            'title' => 'Detail Data Siswa',
+            'siswa' => $siswa
+        ]);
+    }
     /**
      * Display the specified resource.
      */
-    public function show(siswa $siswa)
+    public function edit($id)
     {
-        //
+        $siswa = siswa::with('local')->find($id);
+        $kelas = local::all();
+        return view('admin.siswa.edit', [
+            'menu' => 'siswa',
+            'title' => 'Edit Data Siswa',
+            'siswa' => $siswa,
+            'kelas' => $kelas
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(siswa $siswa)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $validasi = $request->validate([
+            'nama' => 'nullable',
+            'nisn' => 'nullable',
+            'alamat' => 'nullable',
+            'jk' => 'nullable',
+            'nohp' => 'nullable',
+            'username' => 'nullable',
+            'password' => 'nullable',
+            'nohp_wm' => 'nullable',
+            'nama_wm' => 'nullable',
+            'alamat_wm' => 'nullable',
+            'id_local' => 'nullable',
+            'id_user' => 'nullable',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, siswa $siswa)
-    {
-        //
+        $siswa = Siswa::find($id);
+        $siswa->nama = $validasi['nama'] ?? $siswa->nama;
+        $siswa->nisn = $validasi['nisn'] ?? $siswa->nisn;
+        $siswa->alamat = $validasi['alamat'] ?? $siswa->alamat;
+        $siswa->jk = $validasi['jk'] ?? $siswa->jk;
+        $siswa->nohp = $validasi['nohp'] ?? $siswa->nohp;
+        $siswa->username = $validasi['username'] ?? $siswa->username;
+        if ($request->filled('password')) {
+            $siswa->password = bcrypt($validasi['password']);
+        }
+        $siswa->nohp_wm = $validasi['nohp_wm'] ?? $siswa->nohp_wm;
+        $siswa->nama_wm = $validasi['nama_wm'] ?? $siswa->nama_wm;
+        $siswa->alamat_wm = $validasi['alamat_wm'] ?? $siswa->alamat_wm;
+        $siswa->id_local = $validasi['id_local'] ?? $siswa->id_local;
+        $siswa->id_user = $validasi['id_user'] ?? $siswa->id_user;
+        $siswa->save();
+        return redirect(route('siswa.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(siswa $siswa)
+    public function destroy($id)
     {
-        //
+        $siswa = siswa::find($id);
+        $siswa->delete();
+        return redirect(route('siswa.index'));
     }
 }

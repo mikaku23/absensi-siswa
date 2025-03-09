@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('jk', ['L', 'P']);
             $table->date('tanggal_lahir');
             $table->string('username', 30);
-            $table->string('password', 30);
+            $table->string('password');
             $table->foreignId('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

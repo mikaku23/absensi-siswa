@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('nama', 30);
             $table->string('nisn', 20);
             $table->text('alamat');
+            $table->enum('jk', ['L', 'P']);
             $table->string('nohp', 13);
             $table->string('username', 30);
-            $table->string('password', 30);
+            $table->string('password');
             $table->string('nohp_wm', 13);
             $table->string('nama_wm', 30);
             $table->text('alamat_wm');
