@@ -15,26 +15,26 @@ Website ini bertujuan untuk mempermudah guru dalam mengabsen siswa di sekolah. P
 
 ### 👨‍🏫 Admin
 - [x] Dashboard
-- [x] Fitur Login
-- [x] Fitur Register
+- [] Fitur Login
+- [] Fitur Register
 
-- [ ] Fitur Menambahkan data siswa
-- [ ] Fitur Melihat data siswa
-- [ ] Fitur Mengedit data siswa
-- [ ] Fitur Menghapus data siswa
+- [x] Fitur Menambahkan data siswa
+- [x] Fitur Melihat data siswa
+- [x] Fitur Mengedit data siswa
+- [x] Fitur Menghapus data siswa
 
-- [ ] Fitur Menambahkan data guru
-- [ ] Fitur Melihat data guru
-- [ ] Fitur Mengedit data guru
-- [ ] Fitur Menghapus data guru
+- [x] Fitur Menambahkan data guru
+- [x] Fitur Melihat data guru
+- [x] Fitur Mengedit data guru
+- [x] Fitur Menghapus data guru
 
-- [ ] Fitur Menambahkan data kelas
-- [ ] Fitur Melihat data kelas
-- [ ] Fitur Mengedit data kelas
+- [x] Fitur Menambahkan data kelas
+- [x] Fitur Melihat data kelas
+- [x] Fitur Mengedit data kelas
 
-- [ ] Fitur Menambahkan data jurusan
-- [ ] Fitur Melihat data jurusan
-- [ ] Fitur Mengedit data jurusan
+- [x] Fitur Menambahkan data jurusan
+- [x] Fitur Melihat data jurusan
+- [x] Fitur Mengedit data jurusan
 
 - [ ] Fitur Menambahkan data wali kelas
 - [ ] Fitur Melihat data wali kelas
