@@ -8,8 +8,14 @@ class local extends Model
 {
     protected $fillable = ['nama', 'id_jurusan', 'id_guru'];
 
-    public function siswa()
+    public function jurusan()
     {
-        return $this->hasMany(siswa::class);
+        return $this->belongsTo(Jurusan::class, 'id_jurusan');
+    }
+
+    // Relasi ke tabel guru
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'id_guru');
     }
 }

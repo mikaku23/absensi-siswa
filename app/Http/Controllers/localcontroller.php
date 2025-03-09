@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\guru;
+
 use App\Models\local;
-use App\Models\siswa;
+use App\Models\jurusan;
 use Illuminate\Http\Request;
 
 class localcontroller extends Controller
 {
     public function index()
     {
-        $datasiswa = siswa::all();
-        return view('admin.siswa.index', [
-            'menu' => 'siswa',
-            'title' => 'Data Siswa',
-            'datasiswa' => $datasiswa
+        $local = Local::with('guru')->get(); // Mengambil data dengan relasi
+        $jurusan = Jurusan::all();
+
+        return view('admin.local.index', [
+            'menu' => 'local',
+            'title' => 'Data Kelas',
+            'local' => $local,
+            'jurusan' => $jurusan
         ]);
     }
 
@@ -23,13 +28,21 @@ class localcontroller extends Controller
      */
     public function create()
     {
-        $kelas = local::all();
-        return view('admin.siswa.create', [
-            'menu' => 'siswa',
-            'title' => 'Tambah Data Siswa',
-            'kelas' => $kelas
+        $jurusan = Jurusan::all();
+        $guru = Guru::all();
+
+        // Ambil ID wali kelas yang sudah digunakan
+        $guru_terpakai = Local::pluck('id_guru')->toArray();
+
+        return view('admin.local.create', [
+            'menu' => 'local',
+            'title' => 'Tambah Data Kelas',
+            'jurusan' => $jurusan,
+            'guru' => $guru,
+            'guru_terpakai' => $guru_terpakai // Kirim data guru yang sudah dipakai
         ]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -37,56 +50,53 @@ class localcontroller extends Controller
     public function store(Request $request)
     {
         $validasi = $request->validate([
-            'nama' => 'required',
-            'nisn' => 'required',
-            'alamat' => 'required',
-            'jk' => 'required',
-            'nohp' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'nohp_wm' => 'required',
-            'nama_wm' => 'required',
-            'alamat_wm' => 'required',
-            'id_local' => 'required',
-            'id_user' => 'nullable',
+            'nama' => 'required', // Angkatan (X, XI, XII, XIII)
+            'id_jurusan' => 'required',
+            'id_guru' => 'required'
         ], [
-            'nama.required' => 'Nama Harus Diisi',
-            'nisn.required' => 'NISN Harus Diisi',
-            'alamat.required' => 'Alamat Harus Diisi',
-            'jk.required' => 'Jenis Kelamin Harus Diisi',
-            'nohp.required' => 'No HP murid Harus Diisi',
-            'username.required' => 'Username Harus Diisi',
-            'password.required' => 'Password Harus Diisi',
-            'nohp_wm.required' => 'No HP WaliMurid Harus Diisi',
-            'nama_wm.required' => 'Nama WaliMurid Harus Diisi',
-            'alamat_wm.required' => 'Alamat WaliMurid Harus Diisi',
-            'id_local.required' => 'Kelas Harus Diisi',
+            'nama.required' => 'Angkatan harus dipilih',
+            'id_jurusan.required' => 'Jurusan harus dipilih',
+            'id_guru.required' => 'Wali kelas harus dipilih'
         ]);
 
-        $siswa = new siswa;
-        $siswa->nama = $validasi['nama'];
-        $siswa->nisn = $validasi['nisn'];
-        $siswa->alamat = $validasi['alamat'];
-        $siswa->jk = $validasi['jk'];
-        $siswa->nohp = $validasi['nohp'];
-        $siswa->username = $validasi['username'];
-        $siswa->password = bcrypt($validasi['password']);
-        $siswa->nohp_wm = $validasi['nohp_wm'];
-        $siswa->nama_wm = $validasi['nama_wm'];
-        $siswa->alamat_wm = $validasi['alamat_wm'];
-        $siswa->id_local = $validasi['id_local'];
-        $siswa->id_user = $validasi['id_user'];
-        $siswa->save();
-        return redirect(route('siswa.index'));
+        // Ambil nama jurusan berdasarkan id_jurusan
+        $jurusan = Jurusan::find($validasi['id_jurusan']);
+
+        if (!$jurusan) {
+            return back()->withErrors(['id_jurusan' => 'Jurusan tidak ditemukan']);
+        }
+
+        // Gabungkan angkatan dengan nama jurusan (menggunakan huruf)
+        $nama_kelas = $validasi['nama'] . ' ' . $jurusan->nama;
+
+        // Simpan data ke database
+        $local = new Local();
+        $local->nama = $nama_kelas;
+        $local->id_jurusan = $validasi['id_jurusan'];
+        $local->id_guru = $validasi['id_guru'];
+        $local->save();
+
+        return redirect(route('local.index'));
     }
+
+
 
     public function show($id)
     {
-        $siswa = siswa::find($id);
-        return view('admin.siswa.view', [
-            'menu' => 'siswa',
-            'title' => 'Detail Data Siswa',
-            'siswa' => $siswa
+        $jurusan = Jurusan::all();
+        $guru = Guru::all();
+        $local = Local::find($id);
+
+        // Ambil ID wali kelas yang sudah digunakan
+        $guru_terpakai = Local::pluck('id_guru')->toArray();
+
+        return view('admin.local.view', [
+            'menu' => 'local',
+            'title' => 'Tambah Data Kelas',
+            'jurusan' => $jurusan,
+            'guru' => $guru,
+            'local' => $local,
+            'guru_terpakai' => $guru_terpakai // Kirim data guru yang sudah dipakai
         ]);
     }
     /**
@@ -94,59 +104,65 @@ class localcontroller extends Controller
      */
     public function edit($id)
     {
-        $siswa = siswa::with('local')->find($id);
-        $kelas = local::all();
-        return view('admin.siswa.edit', [
-            'menu' => 'siswa',
+        $local = Local::with('jurusan', 'guru')->find($id);
+        $gurus = Guru::all(); // Ambil semua guru
+        $jurusan = Jurusan::all();
+        $guru_terpakai = Local::pluck('id_guru')->toArray();
+
+        return view('admin.local.edit', [
+            'menu' => 'local',
             'title' => 'Edit Data Siswa',
-            'siswa' => $siswa,
-            'kelas' => $kelas
+            'local' => $local,
+            'jurusan' => $jurusan,
+            'guru' => $gurus, // Kirim variabel $gurus
+            'guru_terpakai' => $guru_terpakai
         ]);
     }
 
     public function update(Request $request, $id)
     {
         $validasi = $request->validate([
-            'nama' => 'nullable',
-            'nisn' => 'nullable',
-            'alamat' => 'nullable',
-            'jk' => 'nullable',
-            'nohp' => 'nullable',
-            'username' => 'nullable',
-            'password' => 'nullable',
-            'nohp_wm' => 'nullable',
-            'nama_wm' => 'nullable',
-            'alamat_wm' => 'nullable',
-            'id_local' => 'nullable',
-            'id_user' => 'nullable',
+            'nama' => 'required', // Angkatan (X, XI, XII, XIII)
+            'id_jurusan' => 'required',
+            'id_guru' => 'required'
+        ], [
+            'nama.required' => 'Angkatan harus dipilih',
+            'id_jurusan.required' => 'Jurusan harus dipilih',
+            'id_guru.required' => 'Wali kelas harus dipilih'
         ]);
 
-        $siswa = siswa::find($id);
-        $siswa->nama = $validasi['nama'] ?? $siswa->nama;
-        $siswa->nisn = $validasi['nisn'] ?? $siswa->nisn;
-        $siswa->alamat = $validasi['alamat'] ?? $siswa->alamat;
-        $siswa->jk = $validasi['jk'] ?? $siswa->jk;
-        $siswa->nohp = $validasi['nohp'] ?? $siswa->nohp;
-        $siswa->username = $validasi['username'] ?? $siswa->username;
-        if ($request->filled('password')) {
-            $siswa->password = bcrypt($validasi['password']);
+        // Ambil data kelas berdasarkan id
+        $local = Local::find($id);
+        if (!$local) {
+            return back()->withErrors(['error' => 'Data tidak ditemukan']);
         }
-        $siswa->nohp_wm = $validasi['nohp_wm'] ?? $siswa->nohp_wm;
-        $siswa->nama_wm = $validasi['nama_wm'] ?? $siswa->nama_wm;
-        $siswa->alamat_wm = $validasi['alamat_wm'] ?? $siswa->alamat_wm;
-        $siswa->id_local = $validasi['id_local'] ?? $siswa->id_local;
-        $siswa->id_user = $validasi['id_user'] ?? $siswa->id_user;
-        $siswa->save();
-        return redirect(route('siswa.index'));
+
+        // Ambil nama jurusan berdasarkan id_jurusan
+        $jurusan = Jurusan::find($validasi['id_jurusan']);
+        if (!$jurusan) {
+            return back()->withErrors(['id_jurusan' => 'Jurusan tidak ditemukan']);
+        }
+
+        // Gabungkan angkatan dengan nama jurusan (menggunakan huruf)
+        $nama_kelas = $validasi['nama'] . ' ' . $jurusan->nama;
+
+        // Update data di database
+        $local->nama = $nama_kelas;
+        $local->id_jurusan = $validasi['id_jurusan'];
+        $local->id_guru = $validasi['id_guru'];
+        $local->save();
+
+        return redirect(route('local.index'))->with('success', 'Data kelas berhasil diperbarui');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        $siswa = siswa::find($id);
-        $siswa->delete();
-        return redirect(route('siswa.index'));
+        $local = local::find($id);
+        $local->delete();
+        return redirect(route('local.index'));
     }   
 }

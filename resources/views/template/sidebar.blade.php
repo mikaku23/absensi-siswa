@@ -20,7 +20,13 @@
                  <i class="bi bi-person"></i>
                  <span>Guru</span>
              </a>
-         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ $menu == 'local' || $menu == 'jurusan' ? '' : 'collapsed' }}" href="{{ route('local.index') }}">
+                <i class="bi bi-person"></i>
+                <span>Local</span>
+            </a>
+        </li>
+
      </ul>
 
  </aside><!-- End Sidebar-->

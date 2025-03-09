@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\jurusan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\gurucontroller;
 use App\Http\Controllers\localcontroller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\siswacontroller;
+use App\Http\Controllers\jurusancontroller;
 
 Route::get('/', function () {
     return view('utama.login');
@@ -27,5 +29,6 @@ Route::get('/register', function () {
 });
 
 Route::resource('siswa', siswacontroller::class);
-Route::resource('kelas', localcontroller::class);
 Route::resource('guru', gurucontroller::class);
+Route::resource('local', localcontroller::class);
+Route::resource('jurusan', jurusancontroller::class);
