@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\dashboardcontroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\gurucontroller;
 use App\Http\Controllers\localcontroller;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\loginlontroller;
 use App\Http\Controllers\siswacontroller;
 use App\Http\Controllers\jurusancontroller;
 use App\Http\Controllers\walikelascontroller;
@@ -12,11 +13,9 @@ Route::get('/', function () {
     return view('utama.login');
 })->name('login');
 
-Route::get('/dashboard', function () {
-    return view('index', [
-        "menu" => "home",
-    ]);
-})->name('home');
+
+Route::get('/dashboard', [dashboardcontroller::class, 'dashboard'])->name('home');
+
 
 Route::get('/latihan', [siswacontroller::class, 'index'])->name('latihan');
 
@@ -32,4 +31,4 @@ Route::resource('siswa', siswacontroller::class);
 Route::resource('guru', gurucontroller::class);
 Route::resource('local', localcontroller::class);
 Route::resource('jurusan', jurusancontroller::class);
-Route::resource('walikelas', walikelascontroller::class); // Pastikan rute resource walikelas didefinisikan di sini
+Route::resource('walikelas', walikelascontroller::class);
