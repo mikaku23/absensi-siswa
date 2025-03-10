@@ -12,10 +12,8 @@ class local extends Model
     {
         return $this->belongsTo(Jurusan::class, 'id_jurusan');
     }
-
-    // Relasi ke tabel guru
     public function guru()
     {
-        return $this->belongsTo(Guru::class, 'id_guru');
+        return $this->belongsTo(Guru::class, 'id_guru', 'id');
     }
 }

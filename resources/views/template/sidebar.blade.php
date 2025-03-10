@@ -16,16 +16,22 @@
         </li>
         <li class="nav-item">
             <a class="nav-link {{ $menu == 'guru' ? '' : 'collapsed' }}" href="{{ route('guru.index') }}">
-                <i class="fas fa-chalkboard-teacher"></i>
+                <i class="bi bi-person-workspace"></i>
                 <span>Guru</span>
             </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link {{ $menu == 'local' || $menu == 'jurusan' ? '' : 'collapsed' }}" href="{{ route('local.index') }}">
                 <i class="bi bi-building"></i>
                 <span>Local</span>
             </a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link {{ $menu == 'walikelas' ? '' : 'collapsed' }}" href="{{ route('walikelas.index') }}">
+                <i class="ri-nurse-fill"></i>
+                <span>Wali Kelas</span>
+            </a>
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->

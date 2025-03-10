@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\jurusan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\gurucontroller;
 use App\Http\Controllers\localcontroller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\siswacontroller;
 use App\Http\Controllers\jurusancontroller;
+use App\Http\Controllers\walikelascontroller;
 
 Route::get('/', function () {
     return view('utama.login');
@@ -32,3 +32,4 @@ Route::resource('siswa', siswacontroller::class);
 Route::resource('guru', gurucontroller::class);
 Route::resource('local', localcontroller::class);
 Route::resource('jurusan', jurusancontroller::class);
+Route::resource('walikelas', walikelascontroller::class); // Pastikan rute resource walikelas didefinisikan di sini
