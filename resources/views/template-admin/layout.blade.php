@@ -42,10 +42,10 @@
 <body>
 
     <!-- ======= Header ======= -->
-    @include('template.navbar')
+    @include('template-admin.navbar')
 
     <!-- ======= Sidebar ======= -->
-    @include('template.sidebar')
+    @include('template-admin.sidebar')
 
     <main id="main" class="main">
 
@@ -58,7 +58,7 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    @include('template.footer')
+    @include('template-admin.footer')
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

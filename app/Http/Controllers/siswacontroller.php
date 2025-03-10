@@ -66,7 +66,7 @@ class siswacontroller extends Controller
             'id_local.required' => 'Kelas Harus Diisi',
         ]);
 
-        $siswa = new siswa;
+        $siswa  = new siswa;
         $siswa->nama = $validasi['nama'];
         $siswa->nisn = $validasi['nisn'];
         $siswa->alamat = $validasi['alamat'];

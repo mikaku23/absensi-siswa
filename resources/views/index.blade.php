@@ -1,4 +1,4 @@
-@extends('template.layout')
+@extends('template-admin.layout')
 @section('title', 'Halaman Index')
 
 @section('konten')
