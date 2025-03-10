@@ -26,12 +26,6 @@
                     <input type="text" class="form-control" id="username" name="username" value="{{$siswa->username}}" disabled>
                 </div>
                 <div class="col-12">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="password" name="password" value="{{$siswa->password}}" disabled>
-                </div>
-
-
-                <div class="col-12">
                     <label for="kelas" class="form-label">Kelas</label>
                     <select name="id_local" id="id_local" class="form-control" disabled>
                         <option disabled selected value="{{$siswa->local_id}}">{{ $siswa->local ? $siswa->local->nama : 'Pilih Kelas' }}</option>

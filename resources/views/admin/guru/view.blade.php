@@ -26,10 +26,6 @@
                     <input type="text" class="form-control" id="username" name="username" value="{{$guru->username}}" disabled>
                 </div>
                 <div class="col-12">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="password" name="password" value="{{$guru->password}}" disabled>
-                </div>
-                <div class="col-12">
                     <label for="jk" class="form-label">Jenis Kelamin</label>
                     <select name="jk" id="jk" class="form-control" disabled>
                         <option disabled selected value="{{$guru->jk}}">{{$guru->jk}}</option>
