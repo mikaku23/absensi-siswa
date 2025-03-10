@@ -32,6 +32,12 @@
                 <span>Wali Kelas</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ $menu == 'ortu' ? '' : 'collapsed' }}" href="{{ route('ortu.index') }}">
+                <i class="bi bi-people"></i>
+                <span>Orang Tua</span>
+            </a>
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->

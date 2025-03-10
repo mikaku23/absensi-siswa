@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\dashboardcontroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\gurucontroller;
+use App\Http\Controllers\ortucontroller;
 use App\Http\Controllers\localcontroller;
 use App\Http\Controllers\loginlontroller;
 use App\Http\Controllers\siswacontroller;
 use App\Http\Controllers\jurusancontroller;
+use App\Http\Controllers\dashboardcontroller;
 use App\Http\Controllers\walikelascontroller;
 
 Route::get('/', function () {
@@ -32,3 +33,4 @@ Route::resource('guru', gurucontroller::class);
 Route::resource('local', localcontroller::class);
 Route::resource('jurusan', jurusancontroller::class);
 Route::resource('walikelas', walikelascontroller::class);
+Route::resource('ortu', ortucontroller::class);
