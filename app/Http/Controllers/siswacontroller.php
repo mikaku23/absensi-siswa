@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\local;
 use App\Models\siswa;
 use Illuminate\Http\Request;
@@ -66,6 +67,12 @@ class siswacontroller extends Controller
             'id_local.required' => 'Kelas Harus Diisi',
         ]);
 
+        $user = new User();
+        $user->username = $validasi['username'];
+        $user->password = bcrypt($validasi['password']);
+        $user->level = 'siswa'; // Default level siswa
+        $user->save();
+        
         $siswa  = new siswa;
         $siswa->nama = $validasi['nama'];
         $siswa->nisn = $validasi['nisn'];
@@ -78,7 +85,7 @@ class siswacontroller extends Controller
         $siswa->nama_wm = $validasi['nama_wm'];
         $siswa->alamat_wm = $validasi['alamat_wm'];
         $siswa->id_local = $validasi['id_local'];
-        $siswa->id_user = $validasi['id_user'];
+        $siswa->id_user = $user->id;
         $siswa->save();
         return redirect(route('siswa.index'));
     }
@@ -124,7 +131,9 @@ class siswacontroller extends Controller
             'id_user' => 'nullable',
         ]);
 
-        $siswa = Siswa::find($id);
+        $siswa = Siswa::findOrFail($id);
+
+        // Update data siswa
         $siswa->nama = $validasi['nama'] ?? $siswa->nama;
         $siswa->nisn = $validasi['nisn'] ?? $siswa->nisn;
         $siswa->alamat = $validasi['alamat'] ?? $siswa->alamat;
@@ -138,8 +147,17 @@ class siswacontroller extends Controller
         $siswa->nama_wm = $validasi['nama_wm'] ?? $siswa->nama_wm;
         $siswa->alamat_wm = $validasi['alamat_wm'] ?? $siswa->alamat_wm;
         $siswa->id_local = $validasi['id_local'] ?? $siswa->id_local;
-        $siswa->id_user = $validasi['id_user'] ?? $siswa->id_user;
+
         $siswa->save();
+
+       $user = User::findOrFail($siswa->id_user);
+        $user->username = $validasi['username'] ?? $user->username;
+        if ($request->filled('password')) {
+            $user->password = bcrypt($validasi['password']);
+        }
+
+        $user->save();
+
         return redirect(route('siswa.index'));
     }
 

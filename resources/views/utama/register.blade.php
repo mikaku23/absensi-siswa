@@ -26,14 +26,15 @@
                     <img src="{{ asset('assets/img/404.jpg') }}" alt="register" class="img-fluid">
                 </div>
                 <div class="col-md-6 p-5">
-                    <form class="user" method="POST" action="#" enctype="multipart/form-data">
+                    <form class="user" method="POST" action="{{route ('registrasi.submit') }}" enctype="multipart/form-data">
+                        @csrf
                         <h1 class="text-center mb-5">Daftar Akun</h1>
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-user" id="name" name="name"
+                            <input type="text" class="form-control form-control-user" id="name" name="username"
                                 placeholder="Username" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control form-control-user" id="pass" name="pass"
+                            <input type="password" class="form-control form-control-user" id="pass" name="password"
                                 placeholder="Password" required>
                         </div>
                         <div class="mb-3 text-center d-grid gap-md-2 mx-auto">
@@ -42,7 +43,7 @@
                         <hr>
 
                         <!-- login -->
-                        <p class=" text-center ">Sudah punya akun? <a class="text-decoration-none" href="{{url('/login')}}">Login</a></p>
+                        <p class=" text-center ">Sudah punya akun? <a class="text-decoration-none" href="#">Login</a></p>
                     </form>
                 </div>
             </div>

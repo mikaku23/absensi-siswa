@@ -19,25 +19,28 @@
                     <img src="{{ asset('assets/img/404.jpg') }}" alt="login" class="img-fluid">
                 </div>
                 <div class="col-md-6 p-5">
-
-                    <form method="POST" action="{{ route('login.process') }}" class="user">
+                    <form method="POST" action="{{route ('login.submit') }}">
                         @csrf
                         <h1 class="text-center mb-5">Halaman Login</h1>
 
                         @if ($errors->any())
                         <div class="alert alert-danger">
-                            {{ $errors->first() }}
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                         @endif
 
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-user" name="username"
-                                placeholder="Username" required>
+                            <input type="text" class="form-control form-control-user" name="username" value="{{ old('username') }}"
+                                placeholder="Username">
                         </div>
 
                         <div class="mb-3">
                             <input type="password" class="form-control form-control-user" name="password"
-                                placeholder="Password" required>
+                                placeholder="Password">
                         </div>
 
                         <div class="mb-3 text-center d-grid gap-md-2 mx-auto">
@@ -46,7 +49,7 @@
                         <hr />
 
                         <p class="text-center">Belum punya akun? <a class="text-decoration-none"
-                                href="{{ url('/register') }}">Register</a></p>
+                                href="{{ route('registrasi') }}">Register</a></p>
                     </form>
 
                 </div>

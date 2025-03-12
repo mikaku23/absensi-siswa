@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class siswa extends Model
+class siswa extends Authenticatable
+
 {
     use HasFactory;
 
@@ -20,5 +22,15 @@ class siswa extends Model
     public function siswaCollection()
     {
         return $this->hasMany(siswa::class, 'id_user');
+    }
+    protected $hidden = ['password'];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

@@ -5,7 +5,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Hash;
+
 
 class Guru extends Authenticatable
 {
@@ -20,14 +20,10 @@ class Guru extends Authenticatable
         'id_user'
     ];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password'];
 
-    // Mutator to hash password before saving to database
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = Hash::make($value);
+        $this->attributes['password'] = bcrypt($value);
     }
 }

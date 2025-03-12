@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="password" name="password" value="">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="biarkan kosong jika tidak ingin mengganti password">
                         <span class="input-group-text" onclick="togglePassword()">
                             <i id="eyeIcon" class="bi bi-eye"></i>
                         </span>

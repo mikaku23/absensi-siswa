@@ -1,10 +1,11 @@
 <?php
-// filepath: /c:/xampp/htdocs/absensi-siswa/app/Http/Controllers/gurucontroller.php
+// filepath: /c:/xampp/htdocs/absensi-guru/app/Http/Controllers/gurucontroller.php
 
 
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class gurucontroller extends Controller
@@ -53,7 +54,12 @@ class gurucontroller extends Controller
             'username.required' => 'Username Harus Diisi',
             'password.required' => 'Password Harus Diisi',
         ]);
-
+        $user = new User();
+        $user->username = $validasi['username'];
+        $user->password = bcrypt($validasi['password']);
+        $user->level = 'guru'; // Default level guru
+        $user->save();
+        
         $guru = new Guru;
         $guru->nama = $validasi['nama'];
         $guru->nip = $validasi['nip'];
@@ -62,7 +68,7 @@ class gurucontroller extends Controller
         $guru->tanggal_lahir = $validasi['tanggal_lahir'];
         $guru->username = $validasi['username'];
         $guru->password = $validasi['password'];
-        $guru->id_user = $validasi['id_user'];
+        $guru->id_user = $user->id;
         $guru->save();
         return redirect(route('guru.index'));
     }
@@ -103,7 +109,7 @@ class gurucontroller extends Controller
             'id_user' => 'nullable',
         ]);
 
-        $guru = Guru::find($id);
+        $guru = guru::findOrFail($id);
         $guru->nama = $validasi['nama'] ?? $guru->nama;
         $guru->nip = $validasi['nip'] ?? $guru->nip;
         $guru->nohp = $validasi['nohp'] ?? $guru->nohp;
@@ -111,10 +117,17 @@ class gurucontroller extends Controller
         $guru->tanggal_lahir = $validasi['tanggal_lahir'] ?? $guru->tanggal_lahir;
         $guru->username = $validasi['username'] ?? $guru->username;
         if ($request->filled('password')) {
-            $guru->password = $validasi['password'];
+            $guru->password = bcrypt($validasi['password']);
         }
-        $guru->id_user = $validasi['id_user'] ?? $guru->id_user;
+
         $guru->save();
+
+        $user = User::findOrFail($guru->id_user);
+        $user->username = $validasi['username'] ?? $user->username;
+        if ($request->filled('password')) {
+            $user->password = bcrypt($validasi['password']);
+        }
+        $user->save();
         return redirect(route('guru.index'));
     }
 
@@ -123,7 +136,14 @@ class gurucontroller extends Controller
      */
     public function destroy($id)
     {
-        $guru = Guru::find($id);
+        $guru = guru::findOrFail($id);
+
+        // Hapus user yang terkait jika ada
+        if ($guru->id_user) {
+            User::where('id', $guru->id_user)->delete();
+        }
+
+        // Hapus guru
         $guru->delete();
         return redirect(route('guru.index'));
     }

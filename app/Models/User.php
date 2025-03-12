@@ -21,8 +21,13 @@ class User extends Authenticatable
         'level',
         'name',
         'email',
-        'password',
+        'username',
+        'password'
     ];
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class, 'id_user');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
