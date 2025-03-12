@@ -26,8 +26,19 @@ class sesiController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->level = 'guru';
-
         $user->save();
+
+        $guru = new guru;
+        $guru->nip = $request->nip;
+        $guru->nama = $request->nama;
+        $guru->username = $request->username;
+        $guru->password = bcrypt($request->password);
+        $guru->jk = $request->jk;
+        $guru->nohp = $request->nohp;
+        $guru->tanggal_lahir = $request->tanggal_lahir;
+        $guru->id_user = $user->id;
+        $guru->save();
+
         return redirect()->route('login');
     }
 
