@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\guru;
 
+use App\Models\User;
 use App\Models\local;
 use App\Models\jurusan;
 use Illuminate\Http\Request;
@@ -76,9 +77,18 @@ class localcontroller extends Controller
         $local->id_guru = $validasi['id_guru'];
         $local->save();
 
-        return redirect(route('local.index'));
-    }
+        // Update level user menjadi walikelas
+        $guru = Guru::find($validasi['id_guru']);
+        if ($guru) {
+            $user = User::find($guru->id_user);
+            if ($user) {
+                $user->level = 'walikelas';
+                $user->save();
+            }
+        }
 
+        return redirect(route('local.index'))->with('success', 'Data kelas berhasil ditambahkan dan level user diperbarui menjadi walikelas');
+    }
 
 
     public function show($id)

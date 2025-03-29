@@ -18,11 +18,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'level',
-        'name',
-        'email',
         'username',
-        'password'
+        'password',
+        'level',
     ];
     public function siswa()
     {
@@ -50,5 +48,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function walikelas()
+    {
+        return $this->hasOne(Guru::class, 'id_user')->where('level', 'walikelas');
+    }
+    public function guru()
+    {
+        return $this->hasOne(Guru::class, 'id_user');
     }
 }

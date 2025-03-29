@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class dashboardcontroller extends Controller
 {
-    public function dashboard()
+    public function dashboardAdmin()
     {
         $jumlahSiswa = siswa::count(); // Menghitung jumlah siswa
         $jumlahGuru = guru::count(); // Menghitung jumlah guru
@@ -18,7 +18,37 @@ class dashboardcontroller extends Controller
         $jumlahJurusan = jurusan::count(); // Menghitung jumlah jurusan
 
         return view('admin.index', [
-            'menu' => 'home',
+            'menu' => 'dashboard',
+            'jumlahSiswa' => $jumlahSiswa,
+            'jumlahGuru' => $jumlahGuru,
+            'jumlahLocal' => $jumlahLocal,
+            'jumlahJurusan' => $jumlahJurusan
+        ]);
+    }
+    public function dashboardGuru()
+    {
+        $jumlahSiswa = siswa::count(); // Menghitung jumlah siswa
+        $jumlahGuru = guru::count(); // Menghitung jumlah guru
+        $jumlahLocal = local::count(); // Menghitung jumlah local
+        $jumlahJurusan = jurusan::count(); // Menghitung jumlah jurusan
+
+        return view('guru.index', [
+            'menu' => 'dashboard',
+            'jumlahSiswa' => $jumlahSiswa,
+            'jumlahGuru' => $jumlahGuru,
+            'jumlahLocal' => $jumlahLocal,
+            'jumlahJurusan' => $jumlahJurusan
+        ]);
+    }
+    public function dashboardWalikelas()
+    {
+        $jumlahSiswa = siswa::count(); // Menghitung jumlah siswa
+        $jumlahGuru = guru::count(); // Menghitung jumlah guru
+        $jumlahLocal = local::count(); // Menghitung jumlah local
+        $jumlahJurusan = jurusan::count(); // Menghitung jumlah jurusan
+
+        return view('walikelas.index', [
+            'menu' => 'dashboard',
             'jumlahSiswa' => $jumlahSiswa,
             'jumlahGuru' => $jumlahGuru,
             'jumlahLocal' => $jumlahLocal,

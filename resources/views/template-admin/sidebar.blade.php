@@ -1,11 +1,19 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-heading">Menu Utama</li>
 
         <li class="nav-item">
-            <a class="nav-link {{ $menu == 'home' ? '' : 'collapsed' }}" href="{{ route('home') }}">
+            <a class="nav-link {{ $menu == 'dashboard' ? '' : 'collapsed' }}" href="{{ route('dashboard-admin') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-heading">Data Pengguna</li>
+        <li class="nav-item">
+            <a class="nav-link {{ $menu == 'guru' ? '' : 'collapsed' }}" href="{{ route('guru.index') }}">
+                <i class="bi bi-person-workspace"></i>
+                <span>Guru</span>
             </a>
         </li>
         <li class="nav-item">
@@ -15,15 +23,9 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ $menu == 'guru' ? '' : 'collapsed' }}" href="{{ route('guru.index') }}">
-                <i class="bi bi-person-workspace"></i>
-                <span>Guru</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ $menu == 'local' || $menu == 'jurusan' ? '' : 'collapsed' }}" href="{{ route('local.index') }}">
-                <i class="bi bi-building"></i>
-                <span>Local</span>
+            <a class="nav-link {{ $menu == 'ortu' ? '' : 'collapsed' }}" href="{{ route('ortu.index') }}">
+                <i class="bi bi-person-lines-fill"></i>
+                <span>Orang Tua</span>
             </a>
         </li>
         <li class="nav-item">
@@ -32,12 +34,15 @@
                 <span>Wali Kelas</span>
             </a>
         </li>
+        <li class="nav-heading">Manajemen Sekolah</li>
+
         <li class="nav-item">
-            <a class="nav-link {{ $menu == 'ortu' ? '' : 'collapsed' }}" href="{{ route('ortu.index') }}">
-                <i class="bi bi-person-lines-fill"></i>
-                <span>Orang Tua</span>
+            <a class="nav-link {{ $menu == 'local' || $menu == 'jurusan' ? '' : 'collapsed' }}" href="{{ route('local.index') }}">
+                <i class="bi bi-building"></i>
+                <span>Local</span>
             </a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link {{ $menu == 'user' ? '' : 'collapsed' }}" href="{{ route('user.index') }}">
                 <i class="bi bi-people-fill"></i>

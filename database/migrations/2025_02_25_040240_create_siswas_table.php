@@ -19,10 +19,11 @@ return new class extends Migration
             $table->enum('jk', ['L', 'P']);
             $table->string('nohp', 13);
             $table->string('username', 30);
-            $table->string('password');
+            $table->string('password')  ;
             $table->string('nohp_wm', 13);
             $table->string('nama_wm', 30);
             $table->text('alamat_wm');
+            $table->enum('status', ['null', 'hadir', 'izin', 'sakit', 'alpa']);
             $table->foreignId('id_local')->references('id')->on('locals')->onDelete('cascade');
             $table->foreignId('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

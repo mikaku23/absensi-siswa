@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_absen');
             $table->time('jam_absen');
+            $table->enum('status', ['hadir', 'izin', 'sakit', 'alpa']);
             $table->foreignId('id_siswa')->references('id')->on('siswas')->onDelete('cascade');
             $table->foreignId('id_guru')->references('id')->on('gurus')->onDelete('cascade');
             $table->timestamps();

@@ -19,6 +19,26 @@
                     <img src="{{ asset('assets/img/login.avif') }}" alt="login" class="img-fluid">
                 </div>
                 <div class="col-md-6 p-5">
+                    @if(Auth::user())
+                    @if(Auth::user()-> level=='admin')
+                    <script>
+                        window.location = "{{ route('dashboard-admin') }}";
+                    </script>
+                    @elseif(Auth::user()-> level=='guru')
+                    <script>
+                        window.location = "{{ route('dashboard-guru') }}";
+                    </script>
+                    @elseif(Auth::user()-> level=='siswa')
+                    <script>
+                        window.location = "{{ route('rekap.index') }}";
+                    </script>
+                    @elseif(Auth::user()-> level=='walikelas')
+                    <script>
+                        window.location = "{{ route('dashboard-walikelas') }}";
+                    </script>
+                    @endif
+                    @endif
+
                     <form method="POST" action="{{route ('login.submit') }}">
                         @csrf
                         <h1 class="text-center mb-5">Halaman Login</h1>
@@ -41,6 +61,7 @@
                         <div class="mb-3">
                             <input type="password" class="form-control form-control-user" name="password"
                                 placeholder="Password">
+                            
                         </div>
 
                         <div class="mb-3 text-center d-grid gap-md-2 mx-auto">
@@ -57,5 +78,22 @@
         </div>
     </div>
 </body>
+@section('js')
+<script>
+    function togglePassword() {
+        let passwordInput = document.getElementById("password");
+        let eyeIcon = document.getElementById("eyeIcon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.replace("bi-eye", "bi-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.replace("bi-eye-slash", "bi-eye");
+        }
+    }
+</script>
+
+@endsection
 
 </html>

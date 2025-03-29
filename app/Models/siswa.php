@@ -10,8 +10,9 @@ class siswa extends Authenticatable
 
 {
     use HasFactory;
+    protected $table = 'siswas';
 
-    protected $fillable = ['nama', 'nisn', 'alamat', 'jk',  'nohp', 'username', 'password', 'nohp_wm', 'nama_wm', 'alamat_wm', 'id_local', 'id_user'];
+    protected $fillable = ['nama', 'nisn', 'alamat', 'jk',  'nohp', 'username', 'password', 'nohp_wm', 'nama_wm', 'alamat_wm','status', 'id_local', 'id_user'];
 
 
     public function local()
@@ -32,5 +33,9 @@ class siswa extends Authenticatable
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+    public function mengabsen()
+    {
+        return $this->hasMany(Mengabsen::class, 'id_siswa');
     }
 }

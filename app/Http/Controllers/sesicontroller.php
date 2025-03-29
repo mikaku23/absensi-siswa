@@ -50,7 +50,7 @@ class sesiController extends Controller
         ]);
     }
 
-    function submitLogin(Request $request)
+     function submitLogin(Request $request)
     {
         $credentials = $request->only('username', 'password');
 
@@ -60,23 +60,27 @@ class sesiController extends Controller
             // Cek apakah user ini adalah guru
             $guru = Guru::where('username', $user->username)->first();
             if ($guru) {
-                return redirect()->route('welcome');
+                if ($user->level === 'walikelas') {
+                    return redirect()->route('dashboard-walikelas');
+                }
+                return redirect()->route('dashboard-guru');
             }
 
             // Cek apakah user ini adalah siswa
             $siswa = Siswa::where('username', $user->username)->first();
             if ($siswa) {
-                return redirect()->route('hello');
+                return redirect()->route('rekap.index');
             }
 
             // Jika user adalah admin
             if ($user->level === 'admin') {
-                return redirect()->route('home');
+                return redirect()->route('dashboard-admin');
             }
 
         } else {
             return redirect()->back()->with('error', 'Username atau Password Salah');
         }
+        
     }
 
     function logout()

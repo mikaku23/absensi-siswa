@@ -25,8 +25,9 @@
     <link href="{{asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <!-- Template Main CSS File -->
+     
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 
     @yield('css')
@@ -74,7 +75,7 @@
 
     <!-- Template Main JS File -->
     <script src="{{asset('assets/js/main.js')}}"></script>
-
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     @yield('js')
 </body>
 

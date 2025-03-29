@@ -3,17 +3,18 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link {{ $menu == 'welcome' ? '' : 'collapsed' }}" href="{{ route('welcome') }}">
+            <a class="nav-link {{ $menu == 'dashboard' ? '' : 'collapsed' }}" href="{{ route('dashboard-guru') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ $menu == 'absen' ? '' : 'collapsed' }}" href="{{ route('absen.index') }}">
-                <i class="bi bi-grid"></i>
+                <i class="bi bi-calendar-check"></i>
                 <span>Absen</span>
             </a>
         </li>
+
 
     </ul>
 

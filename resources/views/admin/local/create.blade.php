@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Tambah Data Guru</h5>
+            <h5 class="card-title">Tambah Data Kelas</h5>
 
             <!-- Vertical Form -->
             <form class="row g-3" method="POST" action="{{ route('local.store') }}">
