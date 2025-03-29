@@ -16,7 +16,7 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="row justify-content-center p-5">
                 <div class="col-md-4 d-none d-md-block login-image p-3">
-                    <img src="{{ asset('assets/img/login.avif') }}" alt="login" class="img-fluid">
+                    <img src="{{ asset('assets/img/absen33.png') }}" alt="login" class="img-fluid">
                 </div>
                 <div class="col-md-6 p-5">
                     @if(Auth::user())
@@ -69,8 +69,7 @@
                         </div>
                         <hr />
 
-                        <p class="text-center">Belum punya akun? <a class="text-decoration-none"
-                                href="{{ route('registrasi') }}">Register</a></p>
+                       
                     </form>
 
                 </div>
