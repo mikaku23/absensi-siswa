@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Login</title>
+    <link href="{{asset('assets/img/absen33.png')}}" rel="icon">
 
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
@@ -16,7 +17,7 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="row justify-content-center p-5">
                 <div class="col-md-4 d-none d-md-block login-image p-3">
-                    <img src="{{ asset('assets/img/absen33.png') }}" alt="login" class="img-fluid">
+                    <img src="{{ asset('assets/img/login.avif') }}" alt="login" class="img-fluid">
                 </div>
                 <div class="col-md-6 p-5">
                     @if(Auth::user())
@@ -61,15 +62,15 @@
                         <div class="mb-3">
                             <input type="password" class="form-control form-control-user" name="password"
                                 placeholder="Password">
-                            
+
                         </div>
 
                         <div class="mb-3 text-center d-grid gap-md-2 mx-auto">
                             <button type="submit" class="btn btn-dark btn-user">Log In</button>
                         </div>
-                        <hr />
-
                        
+
+
                     </form>
 
                 </div>
