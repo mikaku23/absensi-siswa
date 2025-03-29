@@ -221,4 +221,28 @@ class AbsenController extends Controller
 
         return redirect(route('absenWalikelas.index'))->with('success', 'Status siswa berhasil diperbarui.');
     }
+    public function indexSiswa(Request $request)
+    {
+        $query = Mengabsen::with(['siswa', 'guru']);
+
+        if ($request->has('kelas') && $request->kelas != '') {
+            $query->whereHas('siswa', function ($q) use ($request) {
+                $q->where('id_local', $request->kelas);
+            });
+        }
+
+        if ($request->has('tanggal_absen') && $request->tanggal_absen != '') {
+            $query->whereDate('tanggal', $request->tanggal_absen);
+        }
+
+        $dataabsen = $query->get();
+        $locals = local::all();
+
+        return view('admin.absen.index', [
+            'menu' => 'absen',
+            'title' => 'Data Absen',
+            'dataabsen' => $dataabsen,
+            'locals' => $locals
+        ]);
+    }
 }

@@ -130,4 +130,15 @@ class pengajuancontroller extends Controller
 
         return redirect()->route('dashboard-walikelas')->with('success', 'Status pengajuan berhasil diperbarui, data absen disimpan, dan notifikasi dihapus.');
     }
+
+    public function indexAdmin()
+    {
+        $pengajuans = Pengajuan::with('siswa.local')->get();
+
+        return view('admin.pengajuan.index', [
+            'menu' => 'pengajuan',
+            'title' => 'Pengajuan',
+            'pengajuans' => $pengajuans
+        ]);
+    }
 }

@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('walikelas', walikelascontroller::class);
     Route::resource('ortu', ortucontroller::class);
     Route::resource('user', usercontroller::class);
+    Route::get('absenSiswa', [AbsenController::class, 'indexSiswa'])->name('absenSiswa.index');
+    Route::delete('/absenSiswa/{id}', [AbsenController::class, 'destroy'])->name('absenSiswa.destroy');
+    Route::get('/pengajuanAdmin', [PengajuanController::class, 'indexAdmin'])->name('pengajuanAdmin.index');
 
     Route::get('/dashboardGuru', [dashboardcontroller::class, 'dashboardGuru'])->name('dashboard-guru');
 

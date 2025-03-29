@@ -49,6 +49,18 @@
                 <span>User</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ $menu == 'absen' ? '' : 'collapsed' }}" href="{{ route('absenSiswa.index') }}">
+                <i class="bi bi-person-check"></i>
+                <span>Absen </span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ $menu == 'pengajuan' ? '' : 'collapsed' }}" href="{{ route('pengajuanAdmin.index') }}">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>Pengajuan</span>
+            </a>
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->

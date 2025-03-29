@@ -7,8 +7,9 @@ use App\Models\local;
 use App\Models\siswa;
 use App\Models\jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class dashboardcontroller extends Controller
+class DashboardController extends Controller
 {
     public function dashboardAdmin()
     {
@@ -32,12 +33,16 @@ class dashboardcontroller extends Controller
         $jumlahLocal = local::count(); // Menghitung jumlah local
         $jumlahJurusan = jurusan::count(); // Menghitung jumlah jurusan
 
+        // Ambil data guru berdasarkan user yang sedang login
+        $guru = guru::where('id_user', Auth::id())->first();
+
         return view('guru.index', [
             'menu' => 'dashboard',
             'jumlahSiswa' => $jumlahSiswa,
             'jumlahGuru' => $jumlahGuru,
             'jumlahLocal' => $jumlahLocal,
-            'jumlahJurusan' => $jumlahJurusan
+            'jumlahJurusan' => $jumlahJurusan,
+            'guru' => $guru // Kirim data guru ke view
         ]);
     }
     public function dashboardWalikelas()
@@ -47,12 +52,16 @@ class dashboardcontroller extends Controller
         $jumlahLocal = local::count(); // Menghitung jumlah local
         $jumlahJurusan = jurusan::count(); // Menghitung jumlah jurusan
 
+        // Ambil data guru berdasarkan user yang sedang login
+        $guru = guru::where('id_user', Auth::id())->first();
+
         return view('walikelas.index', [
             'menu' => 'dashboard',
             'jumlahSiswa' => $jumlahSiswa,
             'jumlahGuru' => $jumlahGuru,
             'jumlahLocal' => $jumlahLocal,
-            'jumlahJurusan' => $jumlahJurusan
+            'jumlahJurusan' => $jumlahJurusan,
+            'walikelas' => $guru // Kirim data guru ke view
         ]);
     }
 }
