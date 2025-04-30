@@ -64,7 +64,7 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                @foreach($dataabsen as $da)
+                @foreach($dataabsen->sortByDesc('tanggal_absen') as $da)
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$da->siswa->nama}}</td>

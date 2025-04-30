@@ -24,52 +24,6 @@
                 </a>
             </li><!-- End Search Icon-->
 
-            <li class="nav-item dropdown">
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-bell"></i>
-                    @if(Auth::user()->guru)
-                    <span class="badge bg-primary badge-number">{{ Auth::user()->guru->notifications->where('is_read', false)->count() }}</span>
-                    @else
-                    <span class="badge bg-primary badge-number">0</span>
-                    @endif
-                </a><!-- End Notification Icon -->
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                    <li class="dropdown-header">
-                        @if(Auth::user()->guru)
-                        You have {{ Auth::user()->guru->notifications->where('is_read', false)->count() }} new notifications
-                        @else
-                        You have 0 new notifications
-                        @endif
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    @if(Auth::user()->guru)
-                    @foreach(Auth::user()->guru->notifications->where('is_read', false) as $notification)
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>{{ $notification->title }}</h4>
-                            <p>{{ $notification->message }}</p>
-                            <p>{{ $notification->created_at->diffForHumans() }}</p>
-                        </div>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    @endforeach
-                    @endif
-
-                    <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
-                    </li>
-
-                </ul><!-- End Notification Dropdown Items -->
-
-            </li><!-- End Notification Nav -->
             @if(Auth::check())
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">

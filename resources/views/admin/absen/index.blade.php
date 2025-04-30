@@ -42,41 +42,41 @@
         </form>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead class="text-center">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Kelas</th>
-                        <th>Status</th>
-                        <th>Tanggal Absen</th>
-                        <th>Jam Absen</th>
-                        <th>Guru yang Mengabsen</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    @foreach($dataabsen as $da)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$da->siswa->nama}}</td>
-                        <td>{{$da->siswa->local->nama}}</td>
-                        <td>{{$da->status}}</td>
-                        <td>{{$da->tanggal_absen}}</td>
-                        <td>{{$da->jam_absen}}</td>
-                        <td>{{$da->guru->nama}}</td>
-                        <td>
-                            <div class="action-btns">
-                              
-                                <form action="{{ route('absenSiswa.destroy', $da->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class='btn btn-outline-danger btn-sm' onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class='far fa-trash-alt' title="hapus"></i></button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
+            <thead class="text-center">
+                <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Status</th>
+                <th>Tanggal Absen</th>
+                <th>Jam Absen</th>
+                <th>Guru yang Mengabsen</th>
+                <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @foreach($dataabsen->sortByDesc('tanggal_absen') as $da)
+                <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$da->siswa->nama}}</td>
+                <td>{{$da->siswa->local->nama}}</td>
+                <td>{{$da->status}}</td>
+                <td>{{$da->tanggal_absen}}</td>
+                <td>{{$da->jam_absen}}</td>
+                <td>{{$da->guru->nama}}</td>
+                <td>
+                    <div class="action-btns">
+                      
+                    <form action="{{ route('absenSiswa.destroy', $da->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class='btn btn-outline-danger btn-sm' onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class='far fa-trash-alt' title="hapus"></i></button>
+                    </form>
+                    </div>
+                </td>
+                </tr>
+                @endforeach
+            </tbody>
             </table>
         </div>
     </div>

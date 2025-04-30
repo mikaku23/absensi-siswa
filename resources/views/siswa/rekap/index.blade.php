@@ -36,13 +36,12 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Jam Masuk</th>
-
                                 <th>Status</th>
                                 <th>Guru yang Mengabsen</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            @foreach($rekapAbsensi as $rekap)
+                            @foreach($rekapAbsensi->sortByDesc('tanggal_absen') as $rekap)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$rekap->tanggal_absen}}</td>

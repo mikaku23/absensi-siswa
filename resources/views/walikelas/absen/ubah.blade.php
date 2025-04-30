@@ -7,7 +7,7 @@
             <h5 class="mb-0">Edit Data {{$mengabsen->siswa->nama}}</h5>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('absen3.update', $mengabsen->id) }}">
+            <form method="POST" action="{{ route('absenWalikelas.update', $mengabsen->id) }}">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
@@ -25,7 +25,7 @@
 
                 <div class="row justify-content-end">
                     <div class="col-sm-10">
-                        <a href="{{ route('absen3.index') }}">
+                        <a href="{{ route('absenWalikelas.index') }}">
                             <button type="button" class="btn btn-primary">Kembali</button>
                         </a>
                         <button type="submit" class="btn btn-success">Simpan</button>

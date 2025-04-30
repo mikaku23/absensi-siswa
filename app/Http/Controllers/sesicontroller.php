@@ -56,7 +56,7 @@ class sesiController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
+ 
             // Cek apakah user ini adalah guru
             $guru = Guru::where('username', $user->username)->first();
             if ($guru) {
